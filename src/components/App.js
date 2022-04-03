@@ -140,10 +140,26 @@ const states = [{
 
 function App() 
 {
+	const [data, setdata] = useState();
 	// Do not alter/remove main div
+	// console.log(data[0]);
+
+	const selecthandler =(e)=>{
+		setdata(states.filter((item)=>{return item.name == e.target.value? item : null}))
+		console.log(data);
+	}
+
 	return (
 	<div id="main">
-		
+		<select id='state' onChange={(e)=>{selecthandler(e)}}>
+			{states.map((item,index)=>{return <option>{item.name}</option>})}
+		</select>
+		<select id='city'>
+			{/* {data[0].city.map((item,index)=>{return <option>{item.name}</option>})} */}
+		</select>
+		<select id='landmark'>
+			{/* {states.map((item,index)=>{return <option>{item.name}</option>})} */}
+		</select>
 	</div>
 	);
 }
