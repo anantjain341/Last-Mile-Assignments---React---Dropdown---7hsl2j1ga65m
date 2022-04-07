@@ -163,31 +163,34 @@ function App()
 
 	return (
 	<div id="main">
-		<div>
+		<div id='state-title'>
+			States:
 			<select id='state' onChange={(e)=>{statehandler(e)}}>
 					{states.map((item,index)=>{return <option key={index} value={index}>{item.name}</option>})}
 			</select>
 			<div>
-				<h3>{state.name}</h3>
-				<p>{state.description}</p>
+				<h3 id='state-name'>{state.name}</h3>
+				<p id='state-description'>{state.description}</p>
 			</div>
 		</div>
-		<div>
+		<div id='city-title'>
+			Cities:
 			<select id='city' onChange={(e)=>{cityhandler(e)}}>
 				{state.city.map((item,index)=>{return <option key={index} value={index}>{item.name}</option>})}
 			</select>
 			<div>
-				<h3>{city.name}</h3>
-				<p>{city.description}</p>
+				<h3 id='city-name'>{city.name}</h3>
+				<p id='city-description'>{city.description}</p>
 			</div>
 		</div>
-		<div>
+		<div id='landmark-title'>
+			Towns:
 			<select id='landmark' onChange={(e)=>{landmarkhandler(e)}}>
 				{city.landmarks.map((item,index)=>{return <option key={index} value={index}>{item.name}</option>})}
 			</select>
 			<div>
-				<h3>{landmark.name}</h3>
-				<p>{landmark.description}</p>
+				<h3 id='landmark-name'>{landmark.name}</h3>
+				<p id='landmark-name'>{landmark.description}</p>
 			</div>
 		</div>
 	</div>
