@@ -140,26 +140,56 @@ const states = [{
 
 function App() 
 {
-	const [data, setdata] = useState();
+	const [state, setstate] = useState(states[0]);
+	const [city, setcity] = useState(state.city[0]);
+	const [landmark, setlandmark] = useState(city.landmarks[0]);
 	// Do not alter/remove main div
-	// console.log(data[0]);
 
-	const selecthandler =(e)=>{
-		setdata(states.filter((item)=>{return item.name == e.target.value? item : null}))
-		console.log(data);
+	// console.log(state);
+
+	const statehandler =(e)=>{
+		// console.log("state-before",e.target.value);
+		// {states.filter((item,index)=>{return index == e.target.value? setstate(item.city) : null}	)}
+		{states.filter((item,index)=>{return index == e.target.value?( setstate(item), setcity(item.city[0], setlandmark(item.city[0].landmarks[0])) ): null})}
+		// {states.filter((item,index)=>{return index == e.target.value? setlandmark(item.city[0].landmarks) : null})}  
+			// console.log("state-after",state.city);
+	}
+	const cityhandler =(e)=>{
+		{state.city.filter((item,index)=>{return index == e.target.value?( setcity(item), setlandmark(item.landmarks[0]) ): null})}
+	}
+	const landmarkhandler =(e)=>{
+		{city.landmarks.filter((item,index)=>{return index == e.target.value? setlandmark(item) : null})}
 	}
 
 	return (
 	<div id="main">
-		<select id='state' onChange={(e)=>{selecthandler(e)}}>
-			{states.map((item,index)=>{return <option>{item.name}</option>})}
-		</select>
-		<select id='city'>
-			{/* {data[0].city.map((item,index)=>{return <option>{item.name}</option>})} */}
-		</select>
-		<select id='landmark'>
-			{/* {states.map((item,index)=>{return <option>{item.name}</option>})} */}
-		</select>
+		<div>
+			<select id='state' onChange={(e)=>{statehandler(e)}}>
+					{states.map((item,index)=>{return <option key={index} value={index}>{item.name}</option>})}
+			</select>
+			<div>
+				<h3>{state.name}</h3>
+				<p>{state.description}</p>
+			</div>
+		</div>
+		<div>
+			<select id='city' onChange={(e)=>{cityhandler(e)}}>
+				{state.city.map((item,index)=>{return <option key={index} value={index}>{item.name}</option>})}
+			</select>
+			<div>
+				<h3>{city.name}</h3>
+				<p>{city.description}</p>
+			</div>
+		</div>
+		<div>
+			<select id='landmark' onChange={(e)=>{landmarkhandler(e)}}>
+				{city.landmarks.map((item,index)=>{return <option key={index} value={index}>{item.name}</option>})}
+			</select>
+			<div>
+				<h3>{landmark.name}</h3>
+				<p>{landmark.description}</p>
+			</div>
+		</div>
 	</div>
 	);
 }
